@@ -146,6 +146,3 @@ lfcd () {
 # Add ignore Ctrl-D to exit the session
 # set -o ignoreeof
 
-# Add Docker bin to path
-export PATH=/home/ryan/bin:$PATH
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
