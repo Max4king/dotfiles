@@ -1,10 +1,15 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-#   , 󱆃 , 󰄲 ,  , 󰣇 , 󰕈 , 󰣛 , 
+
+# Additional field
+scan_timeout = 1
+follow_symlinks = false
+
+#   , 󱆃 , 󰄲 ,  , 󰣇 , 󰕈 , 󰣛 ,
 
 format = """
 [░▒▓](#a3aed2)\
-[ 󰣇 ](bg:#a3aed2 fg:#090c0c)\
+$os(bg:#a3aed2 fg:#090c0c)\
 [ ](bg:#769ff0 fg:#a3aed2)\
 $directory\
 [ ](fg:#769ff0 bg:#394260)\
@@ -14,7 +19,7 @@ $git_status\
 $nodejs\
 $rust\
 $golang\
-$php\
+$python\
 [ ](fg:#212736)\
 $fill\
 $status\
@@ -22,42 +27,43 @@ $time\
 \n$character"""
 
 
-# [os]
-# disabled = false
-# style = "bg:#a3aed2 fg:#090c0c"
-# format = "[ $symbol ]($style)"
-# 
-# [os.symbols]
-# # Alpaquita = " "
-# # Alpine = " "
-# Amazon = " "
-# Android = " "
-# Arch = "󰣇 "
-# # Artix = " "
-# # CentOS = " "
-# # jDebian = " "
-# Fedora = "󰣛 "
-# # FreeBSD = " "
-# # Garuda = " "
-# # Gentoo = " "
-# # HardenedBSD = "󰞇 "
-# # Illumos = "󰈸 "
-# Linux = " " # This is your "Default" Linux fallback
-# # Macos = " "
-# # Manjaro = " "
-# # NixOS = " "
-# # OpenBSD = " "
-# # openSUSE = " "
-# # OracleLinux = "󰮭 "
-# # Pop = " "
-# # Raspbian = " "
-# # Redhat = " "
-# # RedHatEnterprise = " "
-# # Solus = " "
-# # Suse = " "
-# Ubuntu = "󰕈 "
-# Unknown = " " # Fallback for completely unrecognized systems
-# # Windows = "󰍲 "
+[os]
+disabled = false
+style = "bg:#a3aed2 fg:#090c0c"
+format = "[ $symbol ]($style)"
+
+[os.symbols]
+# Alpaquita = " "
+# Alpine = " "
+Amazon = " "
+Android = " "
+Arch = "󰣇 "
+# Artix = " "
+# CentOS = " "
+# jDebian = " "
+Fedora = "󰣛 "
+# FreeBSD = " "
+# Garuda = " "
+# Gentoo = " "
+# HardenedBSD = "󰞇 "
+# Illumos = "󰈸 "
+Linux = " " # This is your "Default" Linux fallback
+# Macos = " "
+# Manjaro = " "
+# NixOS = " "
+# OpenBSD = " "
+# openSUSE = " "
+# OracleLinux = "󰮭 "
+# Pop = " "
+# Raspbian = " "
+# Redhat = " "
+# RedHatEnterprise = " "
+# Solus = " "
+# Suse = " "
+Ubuntu = "󰕈 "
+Unknown = " " # Fallback for completely unrecognized systems
+EndeavourOS = "󰣇 "
+# Windows = "󰍲 "
 
 # The "fill" module pushes everything after it to the right
 [fill]
@@ -75,6 +81,7 @@ style = "fg:#e3e5e5 bg:#769ff0"
 format = "[$path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+fish_style_pwd_dir_length = 1
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -90,6 +97,7 @@ format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 [git_status]
 style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+ignore_submodules = true # stop deep scan on network drive for slow start
 
 [nodejs]
 symbol = ""
@@ -106,16 +114,23 @@ symbol = ""
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
-[php]
-symbol = ""
+# [php]
+# symbol = ""
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[python]
+symbol = ""
 style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+format = '[[ $symbol (($virtualenv)) ](fg:#769ff0 bg:#212736)]($style)'
+pyenv_version_name = true
 
 [status]
 disabled = false
 format = '[](fg:#ff5555)[ $symbol $int ](bg:#ff5555 fg:#ffffff)'
 symbol = "✘"
 map_symbol = true
+
 
 [time]
 disabled = false
